@@ -22,6 +22,8 @@ class RSLParser(object):
                     for val in params:
                         if val.get('name') == "Target":
                             print("Got a new ptp target to ", val.get("ay"), val.get("ay"))
+                            val.set("ay", "00000000000000000000")
+        tree.write("output.xml")
 
 
     def parse2(self, path):
