@@ -1,5 +1,6 @@
 import sys
 from xml.dom import minidom
+import xml.etree.ElementTree as et
 
 
 class RSLParser(object):
@@ -7,6 +8,23 @@ class RSLParser(object):
         pass
 
     def parse(self, path):
+        tree = et.parse(path)
+        root = tree.getroot()
+        main = root.find("rrs2_MainRoutine")
+        body = main.find("rrs2_RoutineBody")
+        for cmd in body:
+            print("cmd is: ", cmd)
+            if cmd.tag == "rrs2_PureMotionStatement":
+                target = cmd.find("PtpTarget")
+                if target:
+                    params = target.find("TargetParameters")
+                    print("params is: ", params)
+                    for val in params:
+                        if val.get('name') == "Target":
+                            print("Got a new ptp target to ", val.get("ay"), val.get("ay"))
+
+
+    def parse2(self, path):
         xmldoc = minidom.parse(path)
         print(xmldoc)
         motions = xmldoc.getElementsByTagName('rrs2_PureMotionStatement')
