@@ -18,12 +18,12 @@ class RSLParser(object):
                 target = cmd.find("PtpTarget")
                 if target:
                     params = target.find("TargetParameters")
-                    print("params is: ", params)
+                    #print("params is: ", params)
                     for val in params:
                         if val.get('name') == "Target":
                             print("Got a new ptp target to ", val.get("ay"), val.get("ay"))
-                            val.set("ay", "00000000000000000000")
-        tree.write("output.xml")
+                            #val.set("ay", "00000000000000000000")
+        #tree.write("output.xml")
 
 
     def parse2(self, path):
@@ -52,7 +52,7 @@ if __name__ == "__main__":
         path = "samples/simple.rsl"
     parser = RSLParser()
     parser.parse(path)
-    from IPython.frontend.terminal.embed import InteractiveShellEmbed
-    ipshell = InteractiveShellEmbed( banner1="\nStarting IPython shell, available objects are:\n ")
-    ipshell(local_ns=locals())
+    #from IPython.frontend.terminal.embed import InteractiveShellEmbed
+    #ipshell = InteractiveShellEmbed( banner1="\nStarting IPython shell, available objects are:\n ")
+    #ipshell(local_ns=locals())
 
